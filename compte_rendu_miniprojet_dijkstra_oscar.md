@@ -43,4 +43,7 @@ Cet objet est une représentation d'un noeud de graphe, mais il n'est utilisé q
 
 # Notes
 
+Bien qu'étant légèrement différente de l'implémentation classique, cette version "avec tas" de l'algorithme de dijkstra est exactement équivalante à celle vue en classe, à ceci près qu'une meilleure implémentation des tas sous forme d'arbres binaire (des tas binaires) pourrait améliorer le temps d'accès au minimum, et donc améliorer la complexité de l'algorithme. De plus, il n'est plus nécessaire de parcourir une liste de valeurs, puisque le tas renvoie dirrectement la bonne valeur.
+
+Cette implémentation fonctionne également sur les graphes non-orientés, d'où le fait que la classe `Graph` supporte également ce type de graphes.
 

@@ -302,3 +302,15 @@ if __name__ == "__main__":
     # test in case there is no path :
     print("1 -> 500 (does not exist)")
     print(graph_3.dijkstra(1, 500))
+
+    # This implementation also works for non-oriented graphs
+    non_oriented_graph = Graph()
+    non_oriented_graph.add_link(1, 2, 10)
+    non_oriented_graph.add_link(1, 5, 5)
+    non_oriented_graph.add_link(2, 3, 10)
+    non_oriented_graph.add_link(3, 4, 10)
+    non_oriented_graph.add_link(1, 4, 60)
+    non_oriented_graph.add_link(4, 5, 5)
+    print(non_oriented_graph)
+    print("1 -> 4")
+    print(non_oriented_graph.dijkstra(1, 4))
