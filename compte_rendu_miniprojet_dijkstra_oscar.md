@@ -1,6 +1,6 @@
 ---
 title: Compte-rendu du miniprojet
-subtitle: Algorithme de djkstra
+subtitle: Algorithme de dijkstra
 author: Oscar Plaisant
 documentclass: scrartcl
 fontsize: 12pt
@@ -14,7 +14,7 @@ L'objet `Graph` représente un graphe orienté. La consigne demande un graphe no
 
 Cet objet possède des méthodes qui sont documentées dans le fichier. Pour accéder à cette documentation, il sera possible d'utiliser la fonction `help` dans un interptéteur python.
 
-Cet objet possède également la méthode `djkstra`, qui fait l'objet de ce projet.
+Cet objet possède également la méthode `dijkstra`, qui fait l'objet de ce projet.
 Cette méthode à été implémentée en utilisant un objet appelé "Tas", ou "Tas minimum", soit `Heap` en anglais.
 Le tas permet de donner une priorité à chaque noeud du graphe, afin que chaque noeud soit parcouru dans le bon ordre (en commencant par le plus proche connu, soit par le minimum, d'où "tas minimum").
 Le tas implémenté contient des objets de type `Node`.
@@ -39,6 +39,8 @@ La méthode `top`, bien que non nécessaire mais toutefoi pratique est égalemen
 
 **Note:** Cet objet est en fait généré par un `namedtuple`
 
-Cet objet est une représentation d'un noeud de graphe, mais il n'est utilisé que dans la méthode `dijkstra` simplement un objet qui possède trois attributs : `name`, le nom 
+Cet objet est une représentation d'un noeud de graphe, mais il n'est utilisé que dans la méthode `dijkstra`. Il possède simplement trois attributs : `name`, le nom du noeud, `cost`, le coût pour arriver à ce noeud, et `parent` le parent de ce noeud (dans le chemin pour y arriver depuis le noeud de départ).
+
+# Notes
 
 
