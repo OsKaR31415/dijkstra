@@ -1,7 +1,7 @@
 from collections import namedtuple
 
 # Create a node object. Used in the dijksra algorithm.
-Node = namedtuple("Node", ["name", "cost", "parent"])
+Node = namedtuple("Node", ["name", "cost", "path_to"])
 
 
 class Heap:
@@ -204,9 +204,33 @@ class Graph:
                 0: The length of the shortest path.
                 1: A tuple. listing the nodes of the path from *node_start* to
                     *node_end*."""
+        ##### Implementation ###################################################
+        # the algorithm works like so :                                        #
+        #                                                                      #
+        # 1. Stating with the first node (*node_start*) as the current node    #
+        # 2. Put all the neighbours of the current node to the heap. Their     #
+        #      *cost* attribute is increased of the cost of the current node,  #
+        #      so it matches the shortest known distance.                      #
+        # 3. Pop a node from the heap. The heap is a minimum heap, so it always#
+        #      returns the element with le least cost.                         #
+        # 4. Take this poped element is now used as the new current node.      #
+        # 5. if the heap is empty, finish, else restart at 2.                  #
+        #                                                                      #
+        # This algorithm has a problem : if there is any cycle in the graph, it#
+        # will never terminate. So we need to store which nodes we already     #
+        # visited to skip them instead of always adding them to the heap.      #
+        #                                                                      #
+        # The next thing to add is the path finding : this simple version can  #
+        # only get the shortest distance between 2 nodes, but not the matching #
+        # path. So we will store the path to a node in the node himself : this #
+        # is the attribute *path_to* of the *Node* object. The path is updated #
+        # each time a shorter one is found (as the whole object is replaced by #
+        # its version with a least cost).                                      #
+        ########################################################################
+
         # initialize a heap with the starting node
         heap = Heap()
-        heap.push(Node(node_start, 0, parent=()))
+        heap.push(Node(node_start, 0, path_to=()))
 
         # initialize the set of already seen nodes
         seen = set()
@@ -220,7 +244,7 @@ class Graph:
             # Get the cost, the name and the path to this node
             cost = nearest_node.cost
             current_node = nearest_node.name
-            path = nearest_node.parent
+            path = nearest_node.path_to
 
             # if this node is already seen, skip it
             if current_node not in seen:
@@ -248,7 +272,7 @@ class Graph:
                     if previous is None or next < previous:
                         minimums[neighbour] = next
                         # push this minimum into the heap
-                        heap.push(Node(neighbour, next, parent=path))
+                        heap.push(Node(neighbour, next, path_to=path))
 
         # if no path is found, return these values :
         return float("inf"), None
